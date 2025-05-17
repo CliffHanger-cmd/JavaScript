@@ -1,0 +1,13 @@
+body{
+    padding: 10px;
+}
+
+textarea{
+    width: 400px;
+    height: 230px;
+    font-size: 18px;
+    border: 1px solid #dadada;
+    outline: royalblue;
+    resize: none;
+    padding: 10px;
+}
