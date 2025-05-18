@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html{
+    height: 100%;
+    width: 100%;
+    /* background: #000; */
+    background-color: #fff;
+}
+#main{
+    height: 100%;
+    width: 100%;
+    /* padding: 1vw ; */
+    /* background: #000; */
+}
+button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1vw;
+    border-radius: 10px;
+    border: 2px solid royalblue;
+    color: brown;
+    background: rgb(230, 139, 154);
+}
