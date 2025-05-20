@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Countdown Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="timer-container">
+        <div id="countdown">00:00</div>
+
+        <input type="number" id="timeInput" placeholder="Minutes" min="1" value="5" />
+
+        <div class="buttons">
+            <button onclick="startCountdown()">Start</button>
+            <button onclick="pauseCountdown()">Pause</button>
+            <button onclick="resetCountdown()">Reset</button>
+        </div>
+
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

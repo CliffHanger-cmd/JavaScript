@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasbeeh Counter</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg-color: #f0fdf4;
+      --text-color: #065f46;
+      --accent-color: #10b981;
+      --card-color: rgba(255, 255, 255, 0.85);
+    }
+
+    body.dark {
+      --bg-color: #1e293b;
+      --text-color: #f8fafc;
+      --accent-color: #38bdf8;
+      --card-color: rgba(30, 41, 59, 0.95);
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      flex-direction: column;
+      transition: background 0.3s ease;
+    }
+
+    .circle-counter {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--card-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      position: relative;
+      text-align: center;
+    }
+
+    .counts {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .dhikr {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    button {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      margin: 5px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .reset-buttons {
+      margin-top: 10px;
+    }
+
+    .toggle-darkmode {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      cursor: pointer;
+    }
+
+    @media (max-width: 500px) {
+      .circle-counter {
+        width: 240px;
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-darkmode" id="themeToggle"><i class="fas fa-moon"></i></button>
+
+  <div class="circle-counter">
+    <div class="counts">
+      <div>Count: <span id="primaryCount">0</span></div>
+      <div>Cycles: <span id="cycleCount">0</span></div>
+    </div>
+    <div class="dhikr" id="dhikr">Loading Dhikr...</div>
+  </div>
+
+  <button onclick="incrementCount()">Tap Tasbeeh</button>
+
+  <div class="reset-buttons">
+    <button onclick="resetPrimary()">Reset Count</button>
+    <button onclick="resetAll()">Reset All</button>
+  </div>
+
+  <audio id="ding" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+
+  <script>
+    let primary = 0;
+    let cycle = 0;
+    const primaryCount = document.getElementById('primaryCount');
+    const cycleCount = document.getElementById('cycleCount');
+    const dhikr = document.getElementById('dhikr');
+    const ding = document.getElementById('ding');
+
+    async function fetchDhikr() {
+      try {
+        const res = await fetch("https://api.aladhan.com/v1/quran/verse/random");
+        const data = await res.json();
+        dhikr.innerText = data.data.text || 'SubhanAllah';
+      } catch {
+        dhikr.innerText = 'SubhanAllah';
+      }
+    }
+
+    function incrementCount() {
+      primary++;
+      if (primary > 100) {
+        primary = 1;
+        cycle++;
+        cycleCount.innerText = cycle;
+      } else if (primary === 100) {
+        ding.play();
+        cycle++;
+        cycleCount.innerText = cycle;
+      }
+      primaryCount.innerText = primary;
+    }
+
+    function resetPrimary() {
+      primary = 0;
+      primaryCount.innerText = primary;
+    }
+
+    function resetAll() {
+      primary = 0;
+      cycle = 0;
+      primaryCount.innerText = primary;
+      cycleCount.innerText = cycle;
+    }
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const icon = document.querySelector('#themeToggle i');
+      icon.classList.toggle('fa-moon');
+      icon.classList.toggle('fa-sun');
+    });
+
+    fetchDhikr();
+  </script>
+</body>
+</html>

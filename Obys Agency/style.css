@@ -1,0 +1,194 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Plain Light";
+    color: wheat;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+#crsr{
+    height: 2.3vw;
+    width: 2.3vw;
+    border-radius: 50%;
+    /* background-color: wheat; */
+    border: 1px solid wheat;
+    position: fixed;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translateX(-50%,-50%);
+
+}
+#loader{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    background-color: #0B0B0B ;
+    padding: 25vh 10vw;
+}
+.line{
+    /* background-color: red; */
+    height: fit-content;
+    overflow: hidden; 
+    display: flex;   
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4vw;
+}
+
+#line1-part1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+#line1-part1 h5{
+    width: 5vw;
+    text-align: right;
+}
+
+#line1-part1 h5, #line1-part1 h6 {
+    font-size: 3vw;
+
+    font-family: "Silk Serif";
+    font-weight: 100;
+}
+
+.line h2{
+    font-size: 5vw;
+    text-transform: uppercase;
+    font-weight: 900;
+    opacity: 0;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.line h1{
+    font-size: 6.5vw;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+#main{
+    position: relative;
+    background-color: #030303;
+}
+#page1{
+    height: 100vh;
+    width: 100%;
+    background: #151515;
+    /* opacity: 0; */
+    /* background: red; */
+}
+
+#page1 #nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.3vw 4.5vw;
+}
+
+#nav-part2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+#nav-part2 h4{
+    font-size: 1.2vw;
+    font-weight: 500;
+}
+
+.hero{
+    /* background-color: red; */
+    width: 75%;
+    margin-left: 30%;
+    height: fit-content;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+
+}
+.hero h1{
+    font-size: 7.2vw;
+    text-transform: uppercase;
+    line-height: 7.2vw;
+}
+
+.hero h2{
+    font-size: 7.2vw;
+    text-transform: uppercase;
+    line-height: 7.2vw;
+    border-bottom: 0.5vw solid wheat;
+    padding-bottom: 0.7vw;
+    transition: all ease;
+}
+.hero h3{
+    font-size: 7.2vw;
+    text-transform: uppercase;
+    line-height: 7.2vw;
+}
+
+.hero h2:hover{
+    -webkit-text-stroke: 2px wheat;
+    color: transparent;
+    font-weight: 100;
+    border-bottom: 0.5vw solid transparent;
+}
+
+.hero:nth-child(2){
+    margin-top: 10vh;
+}
+
+
+#page2{
+    height: 100vh;
+    width: 100%;
+}
+
+#video-container{
+    height: 60vh;
+    width: 60vw;
+    position: relative;
+    left: 30%;
+
+}
+
+#video-container video{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+@keyframes anime {
+    0%{
+        font-family: "paint Light";
+        -webkit-text-stroke: 1px #fff ;
+        color: #fff;
+        opacity: 1;
+    }
+    47%{
+        font-family: "paint Light";
+        -webkit-text-stroke: 1px #fff ;
+        color: #fff;
+        opacity: 0;
+    }
+    50%{
+        font-family: 'silk serif';
+        -webkit-text-stroke: 1px #fff ;
+        color: transparent;
+        opacity: 1;
+    }
+    100%{
+        font-family: 'silk serif';
+        -webkit-text-stroke: 1px #fff ;
+        color: transparent;
+        opacity: 0;
+    }
+}

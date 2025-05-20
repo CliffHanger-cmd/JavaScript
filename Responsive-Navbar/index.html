@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Navbar with Toggle & Animation</title>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo" tabindex="0">MyWebsite</div>
+
+    <!-- Hamburger -->
+    <div 
+      class="hamburger" 
+      id="hamburger" 
+      role="button" 
+      aria-label="Toggle navigation" 
+      aria-expanded="false" 
+      tabindex="0"
+      onclick="toggleMenu()"
+      onkeypress="handleKey(event)"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Nav Links -->
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="#"><i class="fas fa-info-circle"></i> About</a>
+      <a href="#"><i class="fas fa-cogs"></i> Services</a>
+      <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+      <button class="toggle-theme" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <i class="fa-solid fa-moon"></i>
+        <!-- <i class="fas fa-moon"></i> -->
+      </button>
+    </div>
+  </nav>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

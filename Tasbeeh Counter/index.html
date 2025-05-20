@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muslim Tasbeeh Counter with Cycle Tracker</title>
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    :root {
+      --green: #1abc9c;
+      --gold: #f1c40f;
+      --white: #fff;
+      --dark-bg: #121212;
+      --dark-text: #eee;
+      --light-bg: #f9f9f9;
+      --light-text: #222;
+    }
+
+    body.light {
+      --bg-color: var(--light-bg);
+      --text-color: var(--light-text);
+    }
+
+    body.dark {
+      --bg-color: var(--dark-bg);
+      --text-color: var(--dark-text);
+    }
+
+    .container {
+      background: var(--green);
+      border-radius: 50%;
+      width: 320px;
+      height: 320px;
+      box-shadow: 0 0 20px var(--gold);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      transition: background 0.4s;
+      user-select: none;
+    }
+
+    .counter-circle {
+      width: 180px;
+      height: 180px;
+      border: 8px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+      background: rgba(255 255 255 / 0.12);
+      transition: border-color 0.3s;
+      /* For smooth number */
+      will-change: transform;
+    }
+
+    .cycle-counter {
+      margin-top: 15px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    #dhikr-container {
+      margin-top: 25px;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--gold);
+      min-height: 40px;
+      text-align: center;
+      user-select:none;
+    }
+
+    select {
+      margin-top: 15px;
+      padding: 8px 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.4s ease;
+    }
+
+    button {
+      margin: 12px 6px 0 6px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      background: var(--gold);
+      color: var(--dark-bg);
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+
+    button:hover {
+      background: #d4ac0d;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      margin-top: 25px;
+      width: 80%;
+      height: 12px;
+      background: rgba(255 255 255 / 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: var(--gold);
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Dark mode toggle */
+    .toggle-container {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .toggle-btn {
+      cursor: pointer;
+      background: none;
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      width: 50px;
+      height: 26px;
+      position: relative;
+      outline: none;
+    }
+
+    .toggle-circle {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background: var(--gold);
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+
+    body.dark .toggle-circle {
+      transform: translateX(24px);
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        width: 90vw;
+        height: 90vw;
+      }
+      .counter-circle {
+        width: 140px;
+        height: 140px;
+        font-size: 4rem;
+      }
+    }
+  </style>
+</head>
+<body class="light">
+
+  <div class="container" role="main" aria-label="Tasbeeh counter app">
+    <div class="toggle-container">
+      <button class="toggle-btn" aria-label="Toggle dark mode" aria-pressed="false" id="mode-toggle" tabindex="0">
+        <span class="toggle-circle"></span>
+      </button>
+    </div>
+
+    <div class="counter-circle" id="primary-counter" aria-live="polite" aria-atomic="true" tabindex="0">0</div>
+    <div class="cycle-counter" id="cycle-counter" aria-live="polite" aria-atomic="true" tabindex="0">Cycles: 0</div>
+
+    <div id="dhikr-container" aria-live="polite" aria-atomic="true" tabindex="0">SubhanAllah</div>
+
+    <label for="dhikr-select" style="margin-top: 20px; font-weight:600; color: var(--white); user-select:none;">Choose Dhikr:</label>
+    <select id="dhikr-select" aria-label="Select Dhikr phrase"></select>
+
+    <div class="progress-bar" aria-hidden="true">
+      <div class="progress" id="progress-bar"></div>
+    </div>
+
+    <div class="buttons-container">
+      <button id="increment-btn" aria-label="Increment Tasbeeh counter">Count</button>
+      <button id="reset-primary-btn" aria-label="Reset primary counter">Reset Count</button>
+      <button id="reset-all-btn" aria-label="Reset all counters">Reset All</button>
+    </div>
+
+    <audio id="audio-alert" src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg" preload="auto"></audio>
+  </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script>
+    const dhikrList = [
+      "SubhanAllah",
+      "Alhamdulillah",
+      "Allahu Akbar",
+      "La ilaha illallah",
+      "Astaghfirullah"
+    ];
+
+    const primaryCounterEl = document.getElementById('primary-counter');
+    const cycleCounterEl = document.getElementById('cycle-counter');
+    const dhikrContainer = document.getElementById('dhikr-container');
+    const dhikrSelect = document.getElementById('dhikr-select');
+    const progressBar = document.getElementById('progress-bar');
+    const audioAlert = document.getElementById('audio-alert');
+
+    const incrementBtn = document.getElementById('increment-btn');
+    const resetPrimaryBtn = document.getElementById('reset-primary-btn');
+    const resetAllBtn = document.getElementById('reset-all-btn');
+    const modeToggle = document.getElementById('mode-toggle');
+
+    let primaryCount = 0;
+    let cycleCount = 0;
+
+    // Populate dropdown
+    function populateDhikrDropdown() {
+      dhikrList.forEach(dhikr => {
+        const option = document.createElement('option');
+        option.value = dhikr;
+        option.textContent = dhikr;
+        dhikrSelect.appendChild(option);
+      });
+    }
+
+    // Animate counter value with GSAP
+    function animateCounter(from, to) {
+      gsap.to({ val: from }, {
+        val: to,
+        duration: 0.4,
+        ease: "power1.out",
+        onUpdate() {
+          primaryCounterEl.textContent = Math.floor(this.targets()[0].val);
+        }
+      });
+    }
+
+    // Update cycle count smoothly (no animation needed here)
+    function updateCycleCounter() {
+      cycleCounterEl.textContent = `Cycles: ${cycleCount}`;
+    }
+
+    // Update progress bar width and color
+    function updateProgressBar() {
+      let percentage = (primaryCount / 33) * 100;
+      progressBar.style.width = percentage + "%";
+
+      // Color changes near end
+      if (primaryCount >= 30) {
+        progressBar.style.backgroundColor = "red";
+      } else if (primaryCount >= 20) {
+        progressBar.style.backgroundColor = "orange";
+      } else {
+        progressBar.style.backgroundColor = "var(--gold)";
+      }
+    }
+
+    // Reset counters
+    function resetPrimaryCounter() {
+      animateCounter(primaryCount, 0);
+      primaryCount = 0;
+      dhikrContainer.textContent = dhikrSelect.value || dhikrList[0];
+      updateProgressBar();
+    }
+
+    function resetAllCounters() {
+      animateCounter(primaryCount, 0);
+      primaryCount = 0;
+      cycleCount = 0;
+      updateCycleCounter();
+      dhikrContainer.textContent = dhikrSelect.value || dhikrList[0];
+      updateProgressBar();
+    }
+
+    // Increment primary counter with audio and cycle update
+    function incrementCounter() {
+      if (primaryCount < 33) {
+        primaryCount++;
+        animateCounter(primaryCount - 1, primaryCount);
+        updateProgressBar();
+
+        if (primaryCount === 33) {
+          cycleCount++;
+          updateCycleCounter();
+          audioAlert.play();
+          resetPrimaryCounter();
+        }
+      }
+    }
+
+    // Dark/Light mode toggle
+    function toggleMode() {
+      const isDark = document.body.classList.toggle('dark');
+      document.body.classList.toggle('light', !isDark);
+      modeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+    }
+
+    // When dhikr selected, update text and hide dropdown
+    dhikrSelect.addEventListener('change', () => {
+      dhikrContainer.textContent = dhikrSelect.value;
+      dhikrSelect.style.opacity = '0';
+      dhikrSelect.style.pointerEvents = 'none';
+      // Optionally: focus the increment button for better UX
+      incrementBtn.focus();
+    });
+
+    // Allow re-showing dropdown if user clicks on text
+    dhikrContainer.addEventListener('click', () => {
+      dhikrSelect.style.opacity = '1';
+      dhikrSelect.style.pointerEvents = 'auto';
+      dhikrSelect.focus();
+    });
+
+    // Button events
+    incrementBtn.addEventListener('click', incrementCounter);
+    resetPrimaryBtn.addEventListener('click', resetPrimaryCounter);
+    resetAllBtn.addEventListener('click', resetAllCounters);
+    modeToggle.addEventListener('click', toggleMode);
+
+    // Initialization
+    function init() {
+      populateDhikrDropdown();
+      dhikrSelect.value = dhikrList[0];
+      dhikrContainer.textContent = dhikrList[0];
+      updateCycleCounter();
+      updateProgressBar();
+      document.body.classList.add('light');
+    }
+
+    init();
+
+  </script>
+
+</body>
+</html>
