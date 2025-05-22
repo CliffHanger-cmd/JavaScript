@@ -1,0 +1,122 @@
+:root {
+  --bg-light: #f0fcfc;
+  --bg-dark: #0e1e25;
+  --text-light: #102a43;
+  --text-dark: #f0f4f8;
+  --card-light: #ffffff;
+  --card-dark: #1c2b35;
+  --primary: #2d997b; /* Teal */
+  --accent: #ff6b6b; /* Coral */
+}
+body {
+  margin: 0;
+  padding: 40px 20px;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  display: flex;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+.container {
+  width: 100%;
+  max-width: 400px;
+  background: var(--card-light);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 24px 32px;
+  position: relative;
+  transition: background 0.3s;
+}
+body.dark .container {
+  background: var(--card-dark);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+#toggle-theme {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--accent);
+}
+h1 {
+  text-align: center;
+  margin-top: 0;
+  color: var(--primary);
+}
+form {
+  display: flex;
+  margin-bottom: 24px;
+}
+input,
+button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
+}
+body.dark input,
+body.dark button {
+  border-color: #44505a;
+}
+input {
+  flex: 1;
+  margin-right: 10px;
+  background: inherit;
+  color: inherit;
+}
+input::placeholder {
+  color: #8895a7;
+}
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: var(--accent);
+}
+.weather-info {
+  opacity: 0; /* for GSAP */
+}
+.weather-info img {
+  vertical-align: middle;
+  width: 64px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.detail-grid div {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 14px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+}
+body.dark .detail-grid div {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-dark);
+}
+.detail-grid i {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+.error {
+  color: var(--accent);
+  text-align: center;
+}

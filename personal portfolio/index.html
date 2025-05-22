@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliffhanger | Portfolio</title>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">CliffHanger</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fa-solid fa-bars"></i>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>Hi, I'm CliffHanger</h1>
+        <p>Front-End Developer | UI/UX Enthusiast</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
+
+    <section id="about">
+        <img src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-15bc-51f6-9f05-4e2981685194/raw?se=2025-05-21T19%3A22%3A35Z&sp=r&sv=2024-08-04&sr=b&scid=21fe146b-cd63-5fcd-9f48-45449e55f216&skoid=c953efd6-2ae8-41b4-a6d6-34b1475ac07c&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-20T22%3A34%3A11Z&ske=2025-05-21T22%3A34%3A11Z&sks=b&skv=2024-08-04&sig=ZU9/naqCqOghez%2BIWn3Jbn3Rk%2BaYIt5w0TZLdelt414%3D"
+            alt="Your Name">
+        <div class="text">
+            <h2>About Me</h2>
+            <p>I'm a passionate developer with a knack for building sleek, responsive, and user-friendly web experiences. I thrive on turning ideas into interactive digital solutions, combining clean code with modern design principles. Whether it's developing pixel-perfect frontends or bringing dynamic features to life, I focus on creating seamless user experiences that perform beautifully across all devices.
+            </p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="project1.jpg" alt="Project 1">
+                <div class="content">
+                    <h3>Interactive Weather App</h3>
+                    <p>A weather app that fetches real-time weather data from a public API (such as OpenWeatherMap) and
+                        displays it in a user-friendly interface. The app should allow users to search for the weather
+                        by city name. Use the Fetch API to request data, handle the JSON response, and update the DOM
+                        with the weather information (e.g., temperature, humidity, and conditions). Include error
+                        handling for invalid city names or network issues.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="project2.jpg" alt="Project 2">
+                <div class="content">
+                    <h3>Local Storage To-Do App</h3>
+                    <p>A to-do list application that allows users to add, delete, and mark tasks as completed. The tasks
+                        should be stored in the browser's local storage, ensuring they persist even after the page is
+                        reloaded. Use JavaScript to handle the creation and deletion of tasks, update the DOM
+                        accordingly, and utilize the localStorage API to save tasks. When the page is refreshed, the
+                        tasks should be reloaded from local storage and displayed.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="./images/Quiz interation.png"
+                    alt="Project 3">
+                <div class="content">
+                    <h3>Interactive Quiz App</h3>
+                    <p>A simple interactive quiz app that presents multiple-choice questions to the user. The user
+                        selects answers and submits the quiz. After submission, display the total score based on correct
+                        answers. Use JavaScript to handle user interactions, such as selecting answers and calculating
+                        the score. Manipulate the DOM to dynamically update the question and show the final score after
+                        submission.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="./images/Simple Calculator.png"
+                    alt="Project 3">
+                <div class="content">
+                    <h3>Simple Calculator</h3>
+                    <p>A simple calculator using HTML, CSS, and JavaScript. The calculator should have buttons for
+                        numbers (0-9), basic operators (+, -, *, /), and a display area to show the input and result.
+                        Use JavaScript to handle button clicks, perform calculations, and update the display. Style the
+                        calculator using CSS for a clean, user-friendly interface.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="./images/Form Validation.png"
+                    alt="Project 3">
+                <div class="content">
+                    <h3>JavaScript Form ValidationSimple Calculator</h3>
+                    <p>A form that includes fields for name, email, and password. Write a JavaScript function to validate the form before submission. Ensure that the name field is not empty, the email follows a valid email format, and the password meets certain criteria (e.g., minimum length). If the validation fails, display an error message next to the respective field and prevent the form from being submitted. Style the form and error messages for clarity.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="./images/Image slider.png"
+                    alt="Project 3">
+                <div class="content">
+                    <h3>Image Slider</h3>
+                    <p>An image slider that automatically cycles through a series of images every few seconds. Add next and previous buttons that allow users to manually navigate between images. Use JavaScript intervals to control the automatic image transition, and implement event listeners for the next/previous buttons. Apply CSS transitions for smooth image sliding effects. The slider should be responsive, adjusting to different screen sizes.</p>
+                </div>
+            </div>
+            <!-- Add more project cards -->
+        </div>
+        <a href="https://github.com/CliffHanger-cmd" style="display: flex; align-items: center; justify-content: center; margin-top: 5rem;"
+            class="btn">More Projects</a>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="https://formspree.io/f/xwpojlvw" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        
+        <div class="social-links">
+            <a href="https://github.com/CliffHanger-cmd" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/cliffhanger-cmd/" aria-label="LinkedIn"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://www.Twitter.com" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 CliffHanger. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
